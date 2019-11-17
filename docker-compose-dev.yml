@@ -1,0 +1,47 @@
+mysql_racedb_dev:
+    image: mysql:latest
+    restart: always
+    container_name: mysql_racedb_dev
+    environment:
+        - MYSQL_ROOT_PASSWORD=TechGuide232
+        - MYSQL_DATABASE=racedb
+        - MYSQL_USER=racedb
+        - MYSQL_PASSWORD=SuperFast232
+    ports:
+        - 5432:5432
+    volumes:
+        - ./mysql-data:/var/lib/mysql
+        - ./mysql-etc:/etc/mysql
+
+phpmyadmin_dev:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    container_name: phpmyadmin_dev
+    environment:
+        - MYSQL_ROOT_PASSWORD=TechGuide232
+        - MYSQL_DATABASE=racedb
+        - MYSQL_USER=racedb
+        - MYSQL_PASSWORD=SuperFast232
+    ports:
+        - 8080:80
+        - 8443:443
+    links:
+        - mysql_racedb_dev:db
+    volumes:
+        - ./mysql-data:/var/lib/mysql
+        - ./mysql-etc:/etc/mysql
+
+racedb_app_dev:
+    image: mbuckaway/racedb-mysql:0.8
+    restart: always
+    container_name: racedb_app_dev
+    ports:
+        - 8082:80
+    environment:
+        - TERM=xterm
+    links:
+        - mysql_racedb_dev:db
+    volumes:
+        - ./mysql-data:/var/lib/mysql
+        - ./mysql-etc:/etc/mysql
+
