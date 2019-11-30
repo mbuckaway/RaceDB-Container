@@ -14,6 +14,7 @@ checkconfig() {
 
 run() {
     checkconfig
+    echo "Starting RaceDB Container set..."
     $DOCKERCMD up -d
 }
 
@@ -32,11 +33,22 @@ manage() {
     $DOCKERCMD racedb /RaceDB/manage.py $@
 }
 
+stop() {
+    echo "Stopping RaceDB Container set..."
+    $DOCKERCMD stop
+}
+
+ps() {
+    $DOCKERCMD ps
+}
+
+
 usage() {
     echo "Commands:"
     echo "run - start the racedb container"
     echo "stop - stop the racedb container"
     echo "bash - run bash shell in running container"
+    echo "ps   - list running containers"
     echo "manage - run manage.py in running container (passes additional args to manage)"
     echo "logs - show the racedb container log"
     echo
@@ -53,7 +65,7 @@ if [ "$1" == "-d" ]; then
     shift    
 fi
 shift
-case $cmd in
+case $CMD in
     "run") run
         ;;
     "bash") bash
@@ -62,14 +74,14 @@ case $cmd in
         ;;
     "stop") stop
         ;;
+    "ps") ps
+        ;;
     "manage") manage $@
         ;;
     *) echo "Unknown command."
        usage
        ;;
 esac
-
-echo $DOCKERCMD $CMD $@
 
 
         
