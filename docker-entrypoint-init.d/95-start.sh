@@ -20,7 +20,7 @@ if [ -n "$LLRP_SERVER_HOST" ];then
     ARGS="$ARGS --host $LLRP_SERVER_HOST"
 fi
 
-if [ -n "$ARGS"]; then
+if [ -n "$ARGS" ]; then
     echo "Starting RaceDB with args:"
     echo "Args: $ARGS"
 fi
