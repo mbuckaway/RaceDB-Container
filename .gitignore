@@ -3,3 +3,4 @@ mysql-etc/
 mysql-run/
 dbconfig.env
 RaceDB.sqlite3*
+*.zip
