@@ -2,10 +2,9 @@
 #
 # Start up RaceDB
 #
-export PYTHONPATH=/RaceDB
-# Force the SQLite DB file to be on the data volume is SQLite is used or risk losing the
-# data on an continue update!
 export sqlite3_database_fname=/racedb-data/racedb.db3
+export PYTHONPATH=/RaceDB
+
 cd /RaceDB
 ARGS=""
 if [ -n "$RFID_READER_HOST" ];then
@@ -13,9 +12,6 @@ if [ -n "$RFID_READER_HOST" ];then
 fi
 if [ -n "$RFID_TRANSMIT_POWER" ];then
     ARGS="$ARGS --rfid_transmit_power $RFID_TRANSMIT_POWER"
-fi
-if [ -n "$RFID_READER" ];then
-    ARGS="$ARGS --rfid_reader_host $RFID_READER"
 fi
 if [ -n "$USE_HUB" ];then
     ARGS="$ARGS --hub"
@@ -34,6 +30,10 @@ while true
 do
     /RaceDB/manage.py launch --no_browser $ARGS
     if [ $? -eq 0 ]; then
+        if [ -f /.dontstart ]; then
+            echo "Skipping restart..."
+            exit
+        fi
         break
     fi
     echo "Unable to Start RaceDB. Pausing..."

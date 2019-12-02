@@ -9,7 +9,7 @@ RUN apt-get update \
 RUN groupadd racedb && \
     mkdir -p /docker-entrypoint-init.d/ && \
     cd / && \
-    git clone https://github.com/mbuckaway/RaceDB.git && \
+    git clone https://github.com/mbuckaway/RaceDB.git -b beta && \
     cd /RaceDB && \
     rm -rf .git && \
     python3 -m pip install -r requirements.txt && \

@@ -2,6 +2,12 @@
 #
 # Configure RaceDB
 
+dbconfigerror()
+{
+    echo "Database configuration failed. Refusing to start RaceDB"
+    /usr/sbin/cron -f
+}
+
 DBCONFIG=/RaceDB/RaceDB/DatabaseConfig.py
 TZCONFIG=/RaceDB/RaceDB/time_zone.py
 DBCONFIGURED=/.db-configured
@@ -9,6 +15,23 @@ DBCONFIGURED=/.db-configured
 if [ -f $DBCONFIGURED ]; then
     echo "Database already configured."
 else
+    # Set some reasonable defaults
+    DB_USER=racedb
+    DB_DATABASE=racedb
+
+    if [ -z "$DB_HOST" ]; then
+        DB_HOST=db
+    else
+        DB_HOST=$DB_HOST
+    fi
+
+    if [ -z "$DB_USER" ]; then
+        DB_USER=$DB_USER
+    else
+        DB_USER=$DB_USER
+    fi
+
+
     case "$DATABASE_TYPE" in 
         mysql)
             echo "Configuring RaceDB for Mysql"
@@ -41,7 +64,7 @@ EOF
             cat > $DBCONFIG <<EOF
 DatabaseConfig = {
     'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': '/racedb-data/racedb.db3',		# Name of the database.  Must be configured in your database.
+    'NAME': '/racedb-data/RaceDB.sqlite3',		# Name of the database.  Must be configured in your database.
 }
 EOF
             ;;

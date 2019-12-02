@@ -1,0 +1,4 @@
+[submodule "RaceDB"]
+	path = RaceDB
+	url = git@github.com:mbuckaway/RaceDB.git
+	branch = beta

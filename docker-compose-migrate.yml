@@ -38,6 +38,7 @@ services:
             - db
         volumes:
             - racedb-data:/racedb-data
+            - ./RaceDB.sqlite3:/RaceDB.sqlite3
 volumes:
     mysql-data:
     racedb-data:
