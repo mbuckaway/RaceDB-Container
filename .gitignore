@@ -4,3 +4,8 @@ mysql-run/
 dbconfig.env
 RaceDB.sqlite3*
 *.zip
+release/
+windows/*.env
+windows/*.bak
+windows/*.yml
+

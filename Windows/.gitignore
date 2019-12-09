@@ -1,5 +1,4 @@
 *.TempPoint.*
-*.Export.*
 *.psprojs
 *.RestorePoint.*
 *.Run.ps1

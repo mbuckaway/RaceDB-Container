@@ -10,6 +10,6 @@
     <File Build="0" ReferenceFunction="Show-RaceDBForm_psf">RaceDBForm.psf</File>
     <File Build="0" ReferenceFunction="Show-RaceDBLog_psf">RaceDBLog.psf</File>
     <File Build="0" ReferenceFunction="Show-RaceDBPreferences_psf">RaceDBPreferences.psf</File>
-    <File Build="0" ReferenceFunction="Show-RaceDBUpdate_psf">RaceDBUpdate.psf</File>
+    <File Build="0" ReferenceFunction="Show-RaceDBUpdate2_psf">RaceDBUpdate2.psf</File>
   </Files>
 </Project>
