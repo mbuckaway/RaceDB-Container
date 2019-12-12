@@ -8,7 +8,6 @@ ps2exe -inputFile .\windows\RaceDBController.Export.ps1 -outputFile .\release\Ra
 copy racedb.env release\
 copy docker-compose*.yml release\
 copy dbconfig.env.tmpl release\
-copy migrate.cmd release\
 $zipfilename = "RaceDB-Container-Windows.zip"
 if (Test-Path $zipfilename -PathType leaf)
 {
