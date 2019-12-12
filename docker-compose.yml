@@ -26,6 +26,7 @@ services:
         environment:
             - sqlite3_database_fname:/racedb-data/RaceDB.sqlite3
             - PYTHONPATH:/RaceDB
+            - RACEDBLOGFILE:/racedb-data/RaceDB-log.txt
         env_file:
             - ./dbconfig.env
             - ./racedb.env

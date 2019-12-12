@@ -45,12 +45,13 @@ services:
         ports:
             - "8000:8000"
             - "50111:50111"
-        environment:
-            - sqlite3_database_fname:/racedb-data/RaceDB.sqlite3
-            - PYTHONPATH:/RaceDB
         env_file:
             - ./dbconfig.env
             - ./racedb.env
+        environment:
+            - sqlite3_database_fname:/racedb-data/RaceDB.sqlite3
+            - PYTHONPATH:/RaceDB
+            - RACEDBLOGFILE:/racedb-data/RaceDB-log.txt
         hostname: racedb_app
         networks:
             racedb:

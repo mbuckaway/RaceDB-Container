@@ -4,6 +4,7 @@
 #
 export sqlite3_database_fname=/racedb-data/racedb.db3
 export PYTHONPATH=/RaceDB
+export RACEDBLOGFILE=/racedb-data/RaceDB-log.txt
 
 cd /RaceDB
 ARGS=""

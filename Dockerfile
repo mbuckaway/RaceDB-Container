@@ -6,6 +6,9 @@ RUN apt-get update \
     cron \
     vim.tiny
 
+ENV sqlite3_database_fname=/racedb-data/RaceDB.sqlite3
+ENV RACEDBLOGFILE=/racedb-data/RaceDB-log.txt
+
 RUN groupadd racedb && \
     mkdir -p /docker-entrypoint-init.d/ && \
     cd / && \
@@ -21,7 +24,10 @@ RUN groupadd racedb && \
     cd /RaceDB && \
     /RaceDB/manage.py collectstatic --no-input
 
+ENV PYTHONPATH=/RaceDB
 COPY docker-entrypoint-init.d/* /docker-entrypoint-init.d/
 COPY build-files/entrypoint.sh /usr/sbin/entrypoint.sh
 
-CMD "/usr/sbin/entrypoint.sh"
+EXPOSE 8000
+
+CMD ["/usr/sbin/entrypoint.sh"]
