@@ -44,7 +44,6 @@ services:
         container_name: racedb_app
         ports:
             - "8000:8000"
-            - "50111:50111"
         env_file:
             - ./dbconfig.env
             - ./racedb.env

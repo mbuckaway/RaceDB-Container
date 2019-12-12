@@ -22,7 +22,6 @@ services:
         container_name: racedb_app
         ports:
             - "8000:8000"
-            - "50111:50111"
         environment:
             - sqlite3_database_fname:/racedb-data/RaceDB.sqlite3
             - PYTHONPATH:/RaceDB
