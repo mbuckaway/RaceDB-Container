@@ -114,6 +114,3 @@ THe container is self contained. Building the container requires either MacOSX o
 ## Support
 
 Please use the issue tab on Github to report problems to the maintainer.
-
-
-
