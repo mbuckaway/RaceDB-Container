@@ -104,7 +104,11 @@ build() {
         exit 1
     fi
     . .wharf
-    docker build -t $IMAGE:$TAG .
+    if [ "$TAG" == "beta" ]; then
+      docker build -t $IMAGE:$TAG -f Dockerfile.beta .
+    else
+      docker build -t $IMAGE:$TAG .
+    fi
 }
 
 rebuild() {
@@ -113,7 +117,12 @@ rebuild() {
         exit 1
     fi
     . .wharf
-    docker build -t $IMAGE:$TAG --no-cache .
+
+    if [ "$TAG" == "beta" ]; then
+      docker build -t $IMAGE:$TAG -f Dockerfile.beta --no-cache .
+    else
+      docker build -t $IMAGE:$TAG --no-cache .
+    fi
 }
 
 cleanall() {

@@ -8,9 +8,9 @@ RUN apt-get update \
 
 ENV sqlite3_database_fname=/racedb-data/RaceDB.sqlite3
 ENV RACEDBLOGFILE=/racedb-data/RaceDB-log.txt
+ENV TIME_ZONE=America/Toronto
 
-RUN groupadd racedb && \
-    mkdir -p /docker-entrypoint-init.d/ && \
+RUN mkdir -p /docker-entrypoint-init.d/ && \
     cd / && \
     git clone https://github.com/mbuckaway/RaceDB.git && \
     cd /RaceDB && \

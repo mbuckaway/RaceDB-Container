@@ -41,7 +41,7 @@ DatabaseConfig = {
     'NAME': '$MYSQL_DATABASE',		# Name of the database.  Must be configured in your database.
     'USER': '$MYSQL_USER',		# Username to access the database.  Must be configured in your database.
     'PASSWORD': '$MYSQL_PASSWORD',	# Username password.
-    'HOST': 'db',   # Or the IP Address that your DB is hosted on (eg. '10.156.131.101')
+    'HOST': '$DB_HOST',   # Or the IP Address that your DB is hosted on (eg. '10.156.131.101')
     'PORT': '3306',	# MySql database port
 }
 EOF
@@ -54,7 +54,7 @@ DatabaseConfig = {
     'NAME': '$PSQL_DATABASE',		# Name of the database.  Must be configured in your database.
     'USER': '$PSQL_USER',		# Username to access the database.  Must be configured in your database.
     'PASSWORD': '$PSQL_PASSWORD',	# Username password.
-    'HOST': 'db',   # Or the IP Address that your DB is hosted on (eg. '10.156.131.101')
+    'HOST': '$DB_HOST',   # Or the IP Address that your DB is hosted on (eg. '10.156.131.101')
     'PORT': '5432',	# Psql database port
 }
 EOF
