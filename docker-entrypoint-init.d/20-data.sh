@@ -6,7 +6,6 @@
 # initdata only runs once
 
 INITDATACONFIGURED=/racedb-data/.initdata-configured
-
 export PYTHONPATH=/RaceDB
 # Make sure the sqlitedb gets started on the data volume in case something screws up
 export sqlite3_database_fname=/racedb-data/racedb.db3
@@ -26,5 +25,10 @@ done
 
 if [ ! -f $INITDATACONFIGURED ]; then
     /RaceDB/manage.py init_data
+
+    if [ -n "$RACEDBDEMO" ]; then
+        /RaceDB/manage.py init_demo
+    fi
+
     touch $INITDATACONFIGURED
 fi

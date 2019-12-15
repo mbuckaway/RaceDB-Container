@@ -20,13 +20,13 @@ services:
         container_name: racedb_app
         ports:
             - "8000:80"
+        env_file:
+            - ./dbconfig.env
+            - ./racedb.env
         environment:
             - sqlite3_database_fname:/racedb-data/RaceDB.sqlite3
             - PYTHONPATH:/RaceDB
             - RACEDBLOGFILE:/racedb-data/RaceDB-log.txt
-        env_file:
-            - ./dbconfig.env
-            - ./racedb.env
         hostname: racedb_app
         networks:
             racedb:
@@ -36,6 +36,7 @@ services:
             - db
         volumes:
             - racedb-data:/racedb-data
+            - ./RaceDB.sqlite3:/RaceDB.sqlite3
 volumes:
     mysql-data:
     racedb-data:

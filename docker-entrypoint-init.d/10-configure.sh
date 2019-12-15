@@ -11,6 +11,10 @@ if [ -f $DBCONFIGURED ]; then
 else
     case "$DATABASE_TYPE" in 
         mysql)
+            # Default for container set is db
+            if [ -z "$MYSQL_HOST" ]; then
+                MYSQL_HOST=db
+            fi
             echo "Configuring RaceDB for Mysql"
             cat > $DBCONFIG <<EOF
 DatabaseConfig = {
@@ -18,12 +22,15 @@ DatabaseConfig = {
     'NAME': '$MYSQL_DATABASE',		# Name of the database.  Must be configured in your database.
     'USER': '$MYSQL_USER',		# Username to access the database.  Must be configured in your database.
     'PASSWORD': '$MYSQL_PASSWORD',	# Username password.
-    'HOST': 'db',   # Or the IP Address that your DB is hosted on (eg. '10.156.131.101')
+    'HOST': '$MYSQL_HOST',   # Or the IP Address that your DB is hosted on (eg. '10.156.131.101')
     'PORT': '3306',	# MySql database port
 }
 EOF
             ;;
         psql)
+            if [ -z "$PSQL_HOST" ]; then
+                PSQL_HOST=db
+            fi
             echo "Configuring RaceDB for PostgreSQL"
             cat > $DBCONFIG <<EOF
 DatabaseConfig = {
@@ -31,7 +38,7 @@ DatabaseConfig = {
     'NAME': '$PSQL_DATABASE',		# Name of the database.  Must be configured in your database.
     'USER': '$PSQL_USER',		# Username to access the database.  Must be configured in your database.
     'PASSWORD': '$PSQL_PASSWORD',	# Username password.
-    'HOST': 'db',   # Or the IP Address that your DB is hosted on (eg. '10.156.131.101')
+    'HOST': '$PSQL_HOST',   # Or the IP Address that your DB is hosted on (eg. '10.156.131.101')
     'PORT': '5432',	# Psql database port
 }
 EOF
@@ -41,7 +48,7 @@ EOF
             cat > $DBCONFIG <<EOF
 DatabaseConfig = {
     'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': '/racedb-data/racedb.db3',		# Name of the database.  Must be configured in your database.
+    'NAME': '/racedb-data/RaceDB.sqlite3',		# Name of the database.  Must be configured in your database.
 }
 EOF
             ;;
@@ -51,6 +58,7 @@ EOF
     esac
 
     echo "TIME_ZONE=\"$TIME_ZONE\"" > $TZCONFIG
+    echo "Configured!"
     touch $DBCONFIGURED
 fi
 

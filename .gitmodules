@@ -1,0 +1,7 @@
+[submodule "RaceDB"]
+	path = RaceDB
+	url = git@github.com:mbuckaway/RaceDB.git
+	branch = beta
+[submodule "PS2EXE"]
+	path = PS2EXE
+	url = git@github.com:MScholtes/PS2EXE.git
