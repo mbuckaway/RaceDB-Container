@@ -9,6 +9,9 @@ RUN apt-get update \
 ENV sqlite3_database_fname=/racedb-data/RaceDB.sqlite3
 ENV RACEDBLOGFILE=/racedb-data/RaceDB-log.txt
 ENV TIME_ZONE=America/Toronto
+ENV DATABASE_TYPE=mysql
+ENV MYSQL_USER=racedb
+ENV MYSQL_DATABASE=racedb
 
 RUN mkdir -p /docker-entrypoint-init.d/ && \
     cd / && \
@@ -28,6 +31,6 @@ ENV PYTHONPATH=/RaceDB
 COPY docker-entrypoint-init.d/* /docker-entrypoint-init.d/
 COPY build-files/entrypoint.sh /usr/sbin/entrypoint.sh
 
-EXPOSE 8000
+EXPOSE 80
 
 CMD ["/usr/sbin/entrypoint.sh"]

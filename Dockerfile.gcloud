@@ -31,6 +31,6 @@ ENV PYTHONPATH=/RaceDB
 COPY docker-entrypoint-init.d/* /docker-entrypoint-init.d/
 COPY build-files/entrypoint.sh /usr/sbin/entrypoint.sh
 
-EXPOSE 8000
+EXPOSE 80
 
 CMD ["/usr/sbin/entrypoint.sh"]

@@ -29,7 +29,7 @@ fi
 # Try to start it forever in case there is a database issue
 while true
 do
-    /RaceDB/manage.py launch --no_browser $ARGS
+    /RaceDB/manage.py launch --no_browser --port 80 $ARGS
     if [ $? -eq 0 ]; then
         if [ -f /.dontstart ]; then
             echo "Skipping restart..."

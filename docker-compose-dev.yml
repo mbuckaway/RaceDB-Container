@@ -6,8 +6,6 @@ services:
         container_name: mysql_racedb_app
         command: --default-authentication-plugin=mysql_native_password
         env_file: ./dbconfig.env
-        ports:
-            - "3306:3306"
         networks:
             racedb:
                 aliases:
@@ -43,7 +41,7 @@ services:
         restart: always
         container_name: racedb_app
         ports:
-            - "8000:8000"
+            - "8000:80"
         env_file:
             - ./dbconfig.env
             - ./racedb.env
