@@ -6,8 +6,6 @@ services:
         container_name: mysql_racedb_app
         command: --default-authentication-plugin=mysql_native_password
         env_file: ./dbconfig.env
-        ports:
-            - "3306:3306"
         networks:
             racedb:
                 aliases:
@@ -20,7 +18,7 @@ services:
     phpmyadmin:
         image: phpmyadmin/phpmyadmin:latest
         restart: always
-        container_name: phpmyadmin_app
+        container_name: phpmyadmin_racedb_app
         env_file: ./dbconfig.env
         environment:
             - PMA_HOST=db
@@ -39,15 +37,18 @@ services:
             - mysql-run:/var/run/mysqld
 
     racedb:
-        image: mbuckaway/racedb-mysql:3.0.26beta1
+        image: mbuckaway/racedb-mysql:beta
         restart: always
         container_name: racedb_app
         ports:
-            - "8000:8000"
-            - "50111:50111"
+            - "8000:80"
         env_file:
             - ./dbconfig.env
             - ./racedb.env
+        environment:
+            - sqlite3_database_fname:/racedb-data/RaceDB.sqlite3
+            - PYTHONPATH:/RaceDB
+            - RACEDBLOGFILE:/racedb-data/RaceDB-log.txt
         hostname: racedb_app
         networks:
             racedb:
@@ -57,8 +58,9 @@ services:
             - db
         volumes:
             - racedb-data:/racedb-data
-            # This is only used during development
+            # These two are only used during development
             - ./docker-entrypoint-init.d:/docker-entrypoint-init.d
+            - ./RaceDB:/RaceDB
 
 volumes:
     mysql-data:

@@ -15,7 +15,7 @@ ENV MYSQL_DATABASE=racedb
 
 RUN mkdir -p /docker-entrypoint-init.d/ && \
     cd / && \
-    git clone https://github.com/mbuckaway/RaceDB.git && \
+    git clone https://github.com/mbuckaway/RaceDB.git -b beta && \
     cd /RaceDB && \
     rm -rf .git && \
     python3 -m pip install -r requirements.txt && \
@@ -28,6 +28,7 @@ RUN mkdir -p /docker-entrypoint-init.d/ && \
     /RaceDB/manage.py collectstatic --no-input
 
 ENV PYTHONPATH=/RaceDB
+
 COPY docker-entrypoint-init.d/* /docker-entrypoint-init.d/
 COPY build-files/entrypoint.sh /usr/sbin/entrypoint.sh
 
